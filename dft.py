@@ -103,15 +103,12 @@ with open("dtmf.wav", "rb") as f:
         if len(samples) == N:
             # Compute the DFT for each harmonic.
             dft = calculate_dft(samples, dtmf_harmonics)
-            sum_magnitudes = 0 # Sum of the magnitudes of the harmonics.
             magnitudes_per_harmonic = {} # Dictionary of magnitudes per harmonic.
             for i in range(len(dft)): # For each harmonic in the DFT.
                 phase_vector = dft[i]
                 magnitude = get_magnitude(phase_vector)
                 # Store the magnitude of the harmonic.
                 magnitudes_per_harmonic[dtmf_harmonics[i]] = magnitude
-                # Sum the magnitudes of the harmonics.
-                sum_magnitudes += magnitude
             # Sort the harmonics by magnitude in descending order and create a list
             # of dictionaries with 'k' and 'm' keys for the harmonic number and magnitude.
             # The first two harmonics are the most significant.
